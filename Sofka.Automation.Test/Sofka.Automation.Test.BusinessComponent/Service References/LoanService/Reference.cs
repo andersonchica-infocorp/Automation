@@ -124,16 +124,13 @@ namespace Sofka.Automation.Test.BusinessComponent.LoanService {
         private bool ApprovedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ControlRiskStateField;
+        private bool ControlRiskStateReportedField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorMessageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -184,15 +181,15 @@ namespace Sofka.Automation.Test.BusinessComponent.LoanService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string ControlRiskState {
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ControlRiskStateReported {
             get {
-                return this.ControlRiskStateField;
+                return this.ControlRiskStateReportedField;
             }
             set {
-                if ((object.ReferenceEquals(this.ControlRiskStateField, value) != true)) {
-                    this.ControlRiskStateField = value;
-                    this.RaisePropertyChanged("ControlRiskState");
+                if ((this.ControlRiskStateReportedField.Equals(value) != true)) {
+                    this.ControlRiskStateReportedField = value;
+                    this.RaisePropertyChanged("ControlRiskStateReported");
                 }
             }
         }
@@ -219,19 +216,6 @@ namespace Sofka.Automation.Test.BusinessComponent.LoanService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
                 }
             }
         }

@@ -14,10 +14,9 @@
       <xs:element minOccurs="0" name="AmmountApproved" type="xs:decimal" />
       <xs:element minOccurs="0" name="AmmountRequested" type="xs:decimal" />
       <xs:element minOccurs="0" name="Approved" type="xs:boolean" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Sofka.Automation.Dummy.Entities.Enumerations" minOccurs="0" name="ControlRiskState" type="q2:ControlRiskState" />
+      <xs:element minOccurs="0" name="ControlRiskStateReported" type="xs:boolean" />
       <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LoanRequestResponse" nillable="true" type="tns:LoanRequestResponse" />

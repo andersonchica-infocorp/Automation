@@ -8,8 +8,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="LoanType" nillable="true" type="tns:LoanType" />
-  <xs:simpleType name="ControlRiskState">
-    <xs:restriction base="xs:string" />
-  </xs:simpleType>
-  <xs:element name="ControlRiskState" nillable="true" type="tns:ControlRiskState" />
 </xs:schema>

@@ -86,10 +86,7 @@ namespace Sofka.Automation.Test.BusinessComponent
                 }
             }
 
-            if (!string.IsNullOrEmpty(message))
-            {
-                testDataAccess.SaveResultTestCase(idTestCase, message);
-            }
+            testDataAccess.SaveResultTestCase(idTestCase, message);
 
             return string.IsNullOrEmpty(message);
         }
