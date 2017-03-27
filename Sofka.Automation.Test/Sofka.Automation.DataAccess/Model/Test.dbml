@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Sofka.Automation.Test" Class="TestDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Sofka.Automation.Test;Integrated Security=True" SettingsObjectName="Sofka.Automation.DataAccess.Properties.Settings" SettingsPropertyName="Sofka_Automation_TestConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ResultsTestCase" Member="ResultsTestCases">
+    <Type Name="ResultsTestCase">
+      <Column Name="IdResult" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdTestCase" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Success" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="TestCase_ResultsTestCase" Member="TestCase" ThisKey="IdResult" OtherKey="IdTestCase" Type="TestCase" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestCaseValues" Member="TestCaseValues">
+    <Type Name="TestCaseValue">
+      <Column Name="IdTestCaseValue" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdTestCase" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Property" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TestCase_TestCaseValue" Member="TestCase" ThisKey="IdTestCaseValue" OtherKey="IdTestCase" Type="TestCase" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestCases" Member="TestCases">
+    <Type Name="TestCase">
+      <Column Name="IdTestCase" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Input" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Association Name="TestCase_ResultsTestCase" Member="ResultsTestCase" ThisKey="IdTestCase" OtherKey="IdResult" Type="ResultsTestCase" Cardinality="One" />
+      <Association Name="TestCase_TestCaseValue" Member="TestCaseValue" ThisKey="IdTestCase" OtherKey="IdTestCaseValue" Type="TestCaseValue" Cardinality="One" />
+      <Association Name="TestCase_TestCase" Member="TestCase2" ThisKey="IdTestCase" OtherKey="IdTestCase" Type="TestCase" Cardinality="One" />
+      <Association Name="TestCase_TestCase" Member="TestCase1" ThisKey="IdTestCase" OtherKey="IdTestCase" Type="TestCase" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

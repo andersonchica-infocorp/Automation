@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.Test.WCF", "Sofka.Automation.Test.WCF\Sofka.Automation.Test.WCF.csproj", "{70DF0B50-DAD9-4D06-9EC4-6611A7F3770D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.Test.BusinessComponent", "Sofka.Automation.Test.BusinessComponent\Sofka.Automation.Test.BusinessComponent.csproj", "{D1E04702-7555-49DF-A5BB-754FD20EF3F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.CrossCutting", "Sofka.Automation.CrossCutting\Sofka.Automation.CrossCutting.csproj", "{7B21932B-2AD6-4D82-916F-C83A10C48083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.DataAccess", "Sofka.Automation.DataAccess\Sofka.Automation.DataAccess.csproj", "{A9784F07-59E9-4434-BBA1-AF1EA38ECB43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.Entities", "Sofka.Automation.Entities\Sofka.Automation.Entities.csproj", "{D423CDB6-2997-49B2-B52F-739130F5804F}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70DF0B50-DAD9-4D06-9EC4-6611A7F3770D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70DF0B50-DAD9-4D06-9EC4-6611A7F3770D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70DF0B50-DAD9-4D06-9EC4-6611A7F3770D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70DF0B50-DAD9-4D06-9EC4-6611A7F3770D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1E04702-7555-49DF-A5BB-754FD20EF3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E04702-7555-49DF-A5BB-754FD20EF3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E04702-7555-49DF-A5BB-754FD20EF3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E04702-7555-49DF-A5BB-754FD20EF3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B21932B-2AD6-4D82-916F-C83A10C48083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B21932B-2AD6-4D82-916F-C83A10C48083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B21932B-2AD6-4D82-916F-C83A10C48083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B21932B-2AD6-4D82-916F-C83A10C48083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9784F07-59E9-4434-BBA1-AF1EA38ECB43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9784F07-59E9-4434-BBA1-AF1EA38ECB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9784F07-59E9-4434-BBA1-AF1EA38ECB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9784F07-59E9-4434-BBA1-AF1EA38ECB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D423CDB6-2997-49B2-B52F-739130F5804F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D423CDB6-2997-49B2-B52F-739130F5804F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D423CDB6-2997-49B2-B52F-739130F5804F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D423CDB6-2997-49B2-B52F-739130F5804F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

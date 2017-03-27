@@ -1,0 +1,5 @@
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.CrossCutting\obj\Debug\Sofka.Automation.CrossCutting.csprojResolveAssemblyReference.cache
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.CrossCutting\bin\Debug\Sofka.Automation.CrossCutting.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.CrossCutting\bin\Debug\Sofka.Automation.CrossCutting.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.CrossCutting\obj\Debug\Sofka.Automation.CrossCutting.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.CrossCutting\obj\Debug\Sofka.Automation.CrossCutting.pdb

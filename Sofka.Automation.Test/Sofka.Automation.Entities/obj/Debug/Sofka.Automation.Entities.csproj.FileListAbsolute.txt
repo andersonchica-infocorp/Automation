@@ -1,0 +1,5 @@
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Entities\bin\Debug\Sofka.Automation.Entities.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Entities\bin\Debug\Sofka.Automation.Entities.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Entities\obj\Debug\Sofka.Automation.Entities.csprojResolveAssemblyReference.cache
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Entities\obj\Debug\Sofka.Automation.Entities.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Entities\obj\Debug\Sofka.Automation.Entities.pdb

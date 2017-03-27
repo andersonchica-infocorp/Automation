@@ -1,0 +1,14 @@
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Test.WCF.dll.config
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Test.WCF.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Test.WCF.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Test.BusinessComponent.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Test.BusinessComponent.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\obj\Debug\Sofka.Automation.Test.WCF.csprojResolveAssemblyReference.cache
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\obj\Debug\Sofka.Automation.Test.WCF.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\obj\Debug\Sofka.Automation.Test.WCF.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.DataAccess.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Entities.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.CrossCutting.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.DataAccess.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.Entities.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.WCF\bin\Sofka.Automation.CrossCutting.pdb

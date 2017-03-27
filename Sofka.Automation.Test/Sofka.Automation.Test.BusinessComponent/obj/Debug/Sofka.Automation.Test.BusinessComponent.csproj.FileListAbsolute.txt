@@ -1,0 +1,12 @@
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Test.BusinessComponent.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Test.BusinessComponent.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\obj\Debug\Sofka.Automation.Test.BusinessComponent.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\obj\Debug\Sofka.Automation.Test.BusinessComponent.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\obj\Debug\Sofka.Automation.Test.BusinessComponent.csprojResolveAssemblyReference.cache
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Test.BusinessComponent.dll.config
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.CrossCutting.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.DataAccess.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Entities.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.CrossCutting.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.DataAccess.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Entities.pdb

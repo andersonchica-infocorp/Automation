@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Sofka.Automation.Test.WCF.Test" CodeBehind="Test.svc.cs" %>

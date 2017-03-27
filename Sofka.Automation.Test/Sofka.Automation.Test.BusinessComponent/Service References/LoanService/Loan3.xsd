@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Sofka.Automation.Dummy.Entities.Enumerations" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Sofka.Automation.Dummy.Entities.Enumerations" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LoanType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Car" />
+      <xs:enumeration value="Mortgages" />
+      <xs:enumeration value="Appliance" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LoanType" nillable="true" type="tns:LoanType" />
+  <xs:simpleType name="ControlRiskState">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:element name="ControlRiskState" nillable="true" type="tns:ControlRiskState" />
+</xs:schema>
