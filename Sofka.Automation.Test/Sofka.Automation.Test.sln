@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.DataAccess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.Entities", "Sofka.Automation.Entities\Sofka.Automation.Entities.csproj", "{D423CDB6-2997-49B2-B52F-739130F5804F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sofka.Automation.Provider", "Sofka.Automation.Provider\Sofka.Automation.Provider.csproj", "{7F6E84B3-7FF4-4FE5-B11C-B903DE658875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D423CDB6-2997-49B2-B52F-739130F5804F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D423CDB6-2997-49B2-B52F-739130F5804F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D423CDB6-2997-49B2-B52F-739130F5804F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F6E84B3-7FF4-4FE5-B11C-B903DE658875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F6E84B3-7FF4-4FE5-B11C-B903DE658875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F6E84B3-7FF4-4FE5-B11C-B903DE658875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F6E84B3-7FF4-4FE5-B11C-B903DE658875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

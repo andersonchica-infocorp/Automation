@@ -1,0 +1,5 @@
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Provider\bin\Debug\Sofka.Automation.Provider.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Provider\bin\Debug\Sofka.Automation.Provider.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Provider\obj\Debug\Sofka.Automation.Provider.csprojResolveAssemblyReference.cache
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Provider\obj\Debug\Sofka.Automation.Provider.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Provider\obj\Debug\Sofka.Automation.Provider.pdb
