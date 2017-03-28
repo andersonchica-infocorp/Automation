@@ -12,6 +12,6 @@ namespace Sofka.Automation.Test.WCF
     public interface ITest
     {
         [OperationContract]
-        bool RunTest(int idTestCase);
+        void RunTest(List<int> idTestCases);
     }
 }

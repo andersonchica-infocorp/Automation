@@ -26,35 +26,26 @@ namespace Sofka.Automation.Test.BusinessComponent
             loanClient = new LoanClient();
         }
 
-        public bool RunTest(int idTestCase)
+        public void RunTest(List<int> idTestCases)
         {
-            //LoanRequestRequest request2 = new LoanRequestRequest
-            //{
-            //    AmmountRequested = 1000,
-            //    Id = 1,
-            //    Type = LoanType.Mortgages,
-            //};
-
-            //string s =  XmlHelper.SerializeObject(request2);
-
-
-            TestCase testCase = testDataAccess.GetTestCase(idTestCase);
-            bool success = false;
-
-            if (testCase != null && testCase.IdTestCase > 0)
+            foreach (var idTestCase in idTestCases)
             {
-                LoanRequestRequest request = (LoanRequestRequest)XmlHelper.XmlDeserializeFromString(testCase.Input, typeof(LoanRequestRequest));
-                LoanRequestResponse response = loanClient.LoanRequest(request);
+                TestCase testCase = testDataAccess.GetTestCase(idTestCase);
+                bool success = false;
 
-                success = ValidateTestCase(idTestCase, response);
-            }
-            else
-            {
-                //throw new Exception(string.Format("There is no a test case with the parameter idTestCase = {0}", testCase));
-                success = false;
-            }
+                if (testCase != null && testCase.IdTestCase > 0)
+                {
+                    LoanRequestRequest request = (LoanRequestRequest)XmlHelper.XmlDeserializeFromString(testCase.Input, typeof(LoanRequestRequest));
+                    LoanRequestResponse response = loanClient.LoanRequest(request);
 
-            return success;
+                    success = ValidateTestCase(idTestCase, response);
+                }
+                else
+                {
+                    //throw new Exception(string.Format("There is no a test case with the parameter idTestCase = {0}", testCase));
+                    success = false;
+                }
+            }
         }
 
         private bool ValidateTestCase(int idTestCase, object response)

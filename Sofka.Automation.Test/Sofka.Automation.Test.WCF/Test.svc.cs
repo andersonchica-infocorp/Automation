@@ -11,10 +11,10 @@ namespace Sofka.Automation.Test.WCF
     // NOTE: In order to launch WCF Test Client for testing this service, please select Test.svc or Test.svc.cs at the Solution Explorer and start debugging.
     public class Test : ITest
     {
-        public bool RunTest(int idTestCase)
+        public void RunTest(List<int> idTestCases)
         {
             BusinessComponent.Test testBusiness = new BusinessComponent.Test();
-            return testBusiness.RunTest(idTestCase);
+            testBusiness.RunTest(idTestCases);
         }
     }
 }
