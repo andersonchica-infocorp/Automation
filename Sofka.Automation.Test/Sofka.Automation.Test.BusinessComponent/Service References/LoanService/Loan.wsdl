@@ -39,10 +39,20 @@
   <wsdl:message name="ILoan_LoanRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoanRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoan_Prueba_InputMessage">
+    <wsdl:part name="parameters" element="tns:Prueba" />
+  </wsdl:message>
+  <wsdl:message name="ILoan_Prueba_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PruebaResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILoan">
     <wsdl:operation name="LoanRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoan/LoanRequest" message="tns:ILoan_LoanRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoan/LoanRequestResponse" message="tns:ILoan_LoanRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Prueba">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoan/Prueba" message="tns:ILoan_Prueba_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoan/PruebaResponse" message="tns:ILoan_Prueba_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ILoan" type="tns:ILoan">
@@ -56,12 +66,30 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Prueba">
+      <soap:operation soapAction="http://tempuri.org/ILoan/Prueba" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpsBinding_ILoan" type="tns:ILoan">
     <wsp:PolicyReference URI="#BasicHttpsBinding_ILoan_policy" />
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="LoanRequest">
       <soap:operation soapAction="http://tempuri.org/ILoan/LoanRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Prueba">
+      <soap:operation soapAction="http://tempuri.org/ILoan/Prueba" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -10,3 +10,5 @@ C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.Busin
 C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.CrossCutting.pdb
 C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.DataAccess.pdb
 C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Entities.pdb
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Provider.dll
+C:\Sofka\Automation\Automation\Sofka.Automation.Test\Sofka.Automation.Test.BusinessComponent\bin\Debug\Sofka.Automation.Provider.pdb

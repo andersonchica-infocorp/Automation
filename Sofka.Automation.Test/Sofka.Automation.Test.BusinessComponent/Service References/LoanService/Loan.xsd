@@ -15,4 +15,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Prueba">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PruebaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Sofka.Automation.Dummy.Entities.Loan" minOccurs="0" name="PruebaResult" nillable="true" type="q3:LoanRequestResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

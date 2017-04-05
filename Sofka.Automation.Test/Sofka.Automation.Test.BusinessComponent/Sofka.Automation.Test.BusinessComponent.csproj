@@ -103,6 +103,10 @@
       <Project>{D423CDB6-2997-49B2-B52F-739130F5804F}</Project>
       <Name>Sofka.Automation.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sofka.Automation.Provider\Sofka.Automation.Provider.csproj">
+      <Project>{7f6e84b3-7ff4-4fe5-b11c-b903de658875}</Project>
+      <Name>Sofka.Automation.Provider</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
