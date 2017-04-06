@@ -26,6 +26,8 @@ namespace Sofka.Automation.Test.BusinessComponent
 
         public Test()
         {
+            Provider.XsdGenerator xs = new XsdGenerator();
+
             string url = "http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?wsdl";
 
             WebServiceInfo webServiceInfo;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xml.XMLGen;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Sofka.Automation.Provider
     {
         public XsdGenerator()
         {
-            this.GenerateWsdlProxyClass("http://sofkatestservice.azurewebsites.net/Services/ComplexService.asmx?wsdl");
+            this.GenerateWsdlProxyClass("http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?singleWsdl");
 
             XmlTextWriter textWriter = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po3.xml", null);
             textWriter.Formatting = Formatting.Indented;
@@ -50,6 +51,81 @@ namespace Sofka.Automation.Provider
                 //this.ErrorMessage = "Wsdl Download failed: " + ex.Message;
                 return false;
             }
+                        
+            foreach (PortType portType in sd.PortTypes)
+            {
+                foreach (Operation operation in portType.Operations)
+                {
+                    string opInput = operation.Messages.Input.Message.Name;
+                    string opOutPut = operation.Messages.Output.Message.Name;
+
+                    foreach (Message message in sd.Messages)
+                    {
+                        if (message.Name == opInput)
+                        {
+                            MessagePart mp = message.FindPartByName("parameters");
+                            string nameParameter = mp.Element.Name;
+                            foreach (XmlSchema schema in sd.Types.Schemas)
+                            {
+                                foreach (XmlSchemaElement element in schema.Items)
+                                {
+                                    if (element.Name == nameParameter)
+                                    {
+                                        XmlSchemaType schemaType = element.SchemaType;
+                                        XmlSchemaComplexType complexType = schemaType as XmlSchemaComplexType;
+                                        if (complexType != null)
+                                        {
+                                           XmlSchemaParticle particle = complexType.Particle;
+                                           XmlSchemaSequence sequence = particle as System.Xml.Schema.XmlSchemaSequence;
+                                            if (sequence != null)
+                                            {
+                                                foreach (System.Xml.Schema.XmlSchemaElement childElement in sequence.Items)
+                                                {
+                                                    string parameterName = childElement.Name;
+                                                    string parameterType = childElement.SchemaTypeName.Name;
+
+                                                    foreach (XmlSchema schemaGlobal in sd.Types.Schemas)
+                                                    {
+                                                        foreach (DictionaryEntry item in schemaGlobal.SchemaTypes)
+                                                        {
+                                                            if(((XmlQualifiedName)item.Key) == childElement.SchemaTypeName)
+                                                            {
+                                                                XmlSchemaParticle particu = ((XmlSchemaComplexType)item.Value).Particle;
+                                                                XmlSchemaSequence seq = particu as System.Xml.Schema.XmlSchemaSequence;
+
+                                                                foreach (XmlSchemaElement elementito in seq.Items)
+                                                                {
+                                                                    string parameterNameu = elementito.Name;
+                                                                    string parameterTypeu = elementito.SchemaTypeName.Name;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    
+
+                                                    //XmlTextWriter textWriter = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po3.xml", null);
+                                                    //textWriter.Formatting = Formatting.Indented;
+                                                    //XmlSampleGenerator generator = new XmlSampleGenerator(set, childElement.QualifiedName);
+                                                    //generator.WriteXml(textWriter);
+
+                                                    //XmlTextWriter textWriter2 = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po4.xml", null);
+                                                    //textWriter.Formatting = Formatting.Indented;
+                                                    //XmlSampleGenerator generator2 = new XmlSampleGenerator(set, childElement.SchemaTypeName);
+                                                    //generator.WriteXml(textWriter);
+
+                                                    //parameters.Add(new Parameter(parameterName, parameterType));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
 
             // create an importer and associate with the ServiceDescription
             ServiceDescriptionImporter importer = new ServiceDescriptionImporter();
@@ -76,7 +152,7 @@ namespace Sofka.Automation.Provider
                 }
             }
 
-            return false;           
+            return false;
         }
     }
 }
