@@ -24,12 +24,14 @@
     <MetadataSource Address="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="Loan4.xsd" MetadataType="Schema" ID="de040db9-80a7-4724-976f-c2cce4c7f998" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd5" />
     <MetadataFile FileName="Loan.wsdl" MetadataType="Wsdl" ID="a5cc9145-5230-4888-b3fb-be90fbcf54ce" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?wsdl" />
     <MetadataFile FileName="Loan.disco" MetadataType="Disco" ID="9ae002bc-6dac-4cd3-a3f2-45c8307d9a49" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?disco" />
     <MetadataFile FileName="Loan.xsd" MetadataType="Schema" ID="c521bce6-8dcb-47df-9161-afb2ccc3b753" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd0" />
     <MetadataFile FileName="Loan1.xsd" MetadataType="Schema" ID="b6cece37-dd4c-4362-97fa-dac6af9cd013" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd1" />
     <MetadataFile FileName="Loan2.xsd" MetadataType="Schema" ID="186fc42a-d3e3-491d-83e1-6d90bfc51986" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd2" />
     <MetadataFile FileName="Loan3.xsd" MetadataType="Schema" ID="faeec0b4-7154-4b7b-aaf1-cad79f21b9c0" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd3" />
+    <MetadataFile FileName="Loan41.xsd" MetadataType="Schema" ID="70aab631-8eaf-46f8-9834-3bb2db9f57f6" SourceId="1" SourceUrl="http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

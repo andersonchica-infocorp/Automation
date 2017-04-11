@@ -68,6 +68,12 @@
     <None Include="Service References\LoanService\Loan3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\LoanService\Loan4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoanService\Loan41.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\LoanService\Sofka.Automation.Test.BusinessComponent.LoanService.LoanRequestResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

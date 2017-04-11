@@ -26,82 +26,57 @@ namespace Sofka.Automation.Test.BusinessComponent
 
         public Test()
         {
-            Provider.XsdGenerator xs = new XsdGenerator();
+            LoanRequestRequest e = new LoanRequestRequest() {
+                AmmountRequested = 324234,
+                Direccion = new Direccion {
+                    Carrera = "sdfsdf",
+                    Latitude = new Latitude {
+                        Longitud = 23123
+                    }
+                },
+                Id = 12,
+                Type = LoanType.Car
+            };
 
-            string url = "http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?wsdl";
+            var x = CrossCutting.Utils.XmlHelper.SerializeObject(e);
 
-            WebServiceInfo webServiceInfo;
+            //var a = e.GetType();
+            //Activator.CreateInstance(a.AssemblyQualifiedName, a.q)
 
-            WebRequest.DefaultWebProxy = WebRequest.GetSystemWebProxy();
-            try
-            {
-                webServiceInfo = WebServiceInfo.OpenWsdl(new Uri(url));
-            }
-            catch
-            {
-                //NetworkCredential credentials =
-                //   new NetworkCredential("userId", "password");
-                //WebProxy proxy = new WebProxy("xx.xx.xx.xx:8080",
-                //    true, null, credentials);
-                //WebRequest.DefaultWebProxy = proxy;
-                webServiceInfo = WebServiceInfo.OpenWsdl(new Uri(url));
-            }
-
-            StringBuilder sb = new StringBuilder();
-
-            int i = 1;
-            string strInputParameter = string.Empty;
-            string strParameter = "";
-            foreach (WebMethodInfo method in webServiceInfo.WebMethods)
-            {
-                sb.Append(i.ToString() + ". " + string.Format("{0}",
-                        method.Name));
-
-                foreach (Parameter parameter in method.InputParameters)
-                {
-                    strInputParameter += string.Format("{0} {1},", parameter.Type,
-                              parameter.Name);
-                }
-                if (strInputParameter != "")
-                {
-                    strInputParameter = strInputParameter.Substring(0,
-                                     strInputParameter.Length - 1);
-                    sb.Append("(" + strInputParameter + ")");
-                    strInputParameter = "";
-                }
-                else
-                {
-                    sb.Append("()");
-                }
-                sb.Append("\r\n");
-                i++;
-                //foreach (Parameter parameter in method.OutputParameters)
-                //{
-                //    sb.Append(
-                //        string.Format("\t\t\t{0} {1}", parameter.Name, 
-                //parameter.Type));
-                //}
-            }
-
-
-
-
-            //Provider.XsdGenerator xs = new Provider.XsdGenerator();
-
-            //List<Provider.TestConnector.Parameter> lstParameters = new List<Provider.TestConnector.Parameter>();
-            //lstParameters.Add(new Provider.TestConnector.Parameter
+            //CrossCutting.Utils.XmlHelper.SerializeObject<>
+            //using (var client = new WebClient())
             //{
-            //    Name = "CustomerId",
-            //    Value = "ABC123"
-            //});
+            //    Automation.DataAccess.Test testDataAccess = new Automation.DataAccess.Test();
+            //    TestCase testCase = testDataAccess.GetTestCase(6);
+
+            //    XmlDocument xml = new XmlDocument();
+            //    xml.LoadXml(testCase.Input);
+            //    //xml.FirstChild.Value.GetType();
+
+
+            //    // read the raw SOAP request message from a file
+            //    //var data = File.ReadAllText(testCase.Input);
+            //    // the Content-Type needs to be set to XML
+            //    client.Headers.Add("Content-Type", "text/xml;charset=utf-8");
+            //    // The SOAPAction header indicates which method you would like to invoke
+            //    // and could be seen in the WSDL: <soap:operation soapAction="..." /> element
+            //    client.Headers.Add("SOAPAction", "http://tempuri.org/ILoan/LoanRequest");
+            //    var response = client.UploadString("http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc", testCase.Input);
+            //    Console.WriteLine(response);
+            //}
+
+            Provider.XsdGenerator asas = new XsdGenerator();
+
+            //Automation.DataAccess.Test testDataAccess = new Automation.DataAccess.Test();
+            //TestCase testCase = testDataAccess.GetTestCase(6);
 
             //client = new Provider.TestConnector
             //{
-            //    Parameters = lstParameters,
+            //    Request = testCase.Input,
             //    Url = "http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc",
             //    WSServiceType = Provider.TestConnector.ServiceType.WCF,
             //    WCFContractName = "ILoan",
-            //    WebMethod = "Prueba"
+            //    WebMethod = "LoanRequest"
             //};
 
 

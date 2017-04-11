@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xml.XMLGen;
+using Sofka.Automation.Entities.Wsdl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -16,106 +18,147 @@ namespace Sofka.Automation.Provider
 {
     public class XsdGenerator
     {
+        private int count = 0;
+
         public XsdGenerator()
         {
-            this.GenerateWsdlProxyClass("http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?singleWsdl");
-
-            XmlTextWriter textWriter = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po3.xml", null);
-            textWriter.Formatting = Formatting.Indented;
-            XmlQualifiedName qname = new XmlQualifiedName("GetComplexObject");
-            XmlSampleGenerator generator = new XmlSampleGenerator("http://sofkatestservice.azurewebsites.net/Services/ComplexService.asmx?wsdl", qname);
-            generator.WriteXml(textWriter);
-
-
+            this.GetStructure("http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?Wsdl");
+            //this.GetStructure("https://www.w3schools.com/xml/tempconvert.asmx?wsdl");
         }
 
-        public bool GenerateWsdlProxyClass(string wsdlUrl)
+
+        public string GetStructure(string url)
         {
-            // erase the source file
-            //if (File.Exists(generatedSourceFilename))
-            //    File.Delete(generatedSourceFilename);
+            ServiceDescription serviceDescription = this.GetServiceDescription(url);
+            XmlSchemaSet xmlSchemaSet = this.GetSchemasService(serviceDescription);
 
-            // download the WSDL content into a service description
-            WebClient http = new WebClient();
-            ServiceDescription sd = null;
+            Dictionary<string, dynamic> operations = this.GetOperations(serviceDescription);
+            operations = this.GetParametersOperations(operations, xmlSchemaSet, serviceDescription);
 
-            //if (!string.IsNullOrEmpty(username))
-            //    http.Credentials = new NetworkCredential(username, password);
-
-            try
+            foreach (KeyValuePair<string, dynamic> operation in operations)
             {
-                sd = ServiceDescription.Read(http.OpenRead(wsdlUrl));
+                this.GenerateXml(operation);
             }
-            catch (Exception ex)
+
+            return string.Empty;
+        }
+
+        private XmlDocument GenerateXml(KeyValuePair<string, dynamic> operation)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            XmlElement request = (XmlElement)xmlDocument.AppendChild(xmlDocument.CreateElement(operation.Value.Operation.Name));
+            XmlElement parameters = this.GetXmlParameters(operation.Value.ParameterInput, xmlDocument, request);
+
+            return xmlDocument;
+        }
+
+        private XmlElement GetXmlParameters(List<Parameter> parameters, XmlDocument xmlDocument, XmlElement currentXmlElement)
+        {
+            string aliasNameSpaceCurrentElement = string.Empty;
+            string alias = string.Empty;
+            foreach (Parameter parameter in parameters)
             {
-                //this.ErrorMessage = "Wsdl Download failed: " + ex.Message;
-                return false;
-            }
-                        
-            foreach (PortType portType in sd.PortTypes)
-            {
-                foreach (Operation operation in portType.Operations)
+                if (!string.IsNullOrEmpty(parameter.NameSpace))
                 {
-                    string opInput = operation.Messages.Input.Message.Name;
-                    string opOutPut = operation.Messages.Output.Message.Name;
-
-                    foreach (Message message in sd.Messages)
+                    if (count != 0)
                     {
-                        if (message.Name == opInput)
+                        alias = string.Format("sofka{0}", this.count);
+                        aliasNameSpaceCurrentElement = string.Format("xmlns:{0}", alias);
+                    }
+                    else
+                    {
+                        aliasNameSpaceCurrentElement = "xmlns";
+                    }
+
+                    currentXmlElement.SetAttribute(aliasNameSpaceCurrentElement, parameter.NameSpace);
+                    this.count++;
+
+                    //this.GetXmlParameters(parameter.Value, xmlDocument, currentXmlElement)
+                }
+                else
+                {
+
+                }
+
+                string aliasCurrentElement = string.IsNullOrEmpty(alias) ? string.Empty : string.Format("{0}:");
+
+                XmlElement appendElement = xmlDocument.CreateElement(string.Format("{0}{1}", aliasCurrentElement, parameter.Name));
+                currentXmlElement.AppendChild(appendElement);                
+            }
+
+            return currentXmlElement;
+        }
+
+        private Dictionary<string, dynamic> GetParametersOperations(Dictionary<string, dynamic> operations, XmlSchemaSet xmlSchemaSet, ServiceDescription serviceDescription)
+        {
+            foreach (var operation in operations)
+            {
+                Operation operationAux = ((Operation)operation.Value.Operation);
+                operation.Value.Input = operationAux.Messages.Input;
+                operation.Value.OutPut = operationAux.Messages.Output;
+
+                foreach (Message message in serviceDescription.Messages)
+                {
+                    if (message.Name == operation.Value.Input.Message.Name)
+                    {
+                        foreach (MessagePart messagePart in message.Parts)
                         {
-                            MessagePart mp = message.FindPartByName("parameters");
-                            string nameParameter = mp.Element.Name;
-                            foreach (XmlSchema schema in sd.Types.Schemas)
+                            if (messagePart.Name == "parameters")
                             {
-                                foreach (XmlSchemaElement element in schema.Items)
+                                string nameSpace = messagePart.Element.Namespace;
+                                string name = messagePart.Element.Name;
+
+                                operation.Value.ParameterInput = this.GetParameters(nameSpace, name, xmlSchemaSet);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return operations;
+        }
+
+        private dynamic GetParameters(string nameSpace, string name, XmlSchemaSet xmlSchemaSet)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            if (xmlSchemaSet.Contains(nameSpace))
+            {
+                foreach (XmlSchema xmlSchema in xmlSchemaSet.Schemas(nameSpace))
+                {
+                    foreach (dynamic xmlElement in xmlSchema.Items)
+                    {
+                        if (xmlElement.Name == name)
+                        {
+                            XmlSchemaComplexType xmlSchemaComplexType = new XmlSchemaComplexType();
+                            if (IsPropertyExist(xmlElement, "ElementSchemaType"))
+                            {
+                                xmlSchemaComplexType = xmlElement.ElementSchemaType;
+                            }
+                            else
+                            {
+                                xmlSchemaComplexType = xmlElement as XmlSchemaComplexType;
+                            }
+
+                            XmlSchemaParticle particle = xmlSchemaComplexType.Particle;
+
+                            XmlSchemaSequence sequence = particle as System.Xml.Schema.XmlSchemaSequence;
+
+                            if (sequence != null)
+                            {
+                                foreach (XmlSchemaElement element in sequence.Items)
                                 {
-                                    if (element.Name == nameParameter)
+                                    if (!this.ExistParameterName(element.Name, parameters))
                                     {
-                                        XmlSchemaType schemaType = element.SchemaType;
-                                        XmlSchemaComplexType complexType = schemaType as XmlSchemaComplexType;
-                                        if (complexType != null)
+                                        if (element.ElementSchemaType is XmlSchemaComplexType)
                                         {
-                                           XmlSchemaParticle particle = complexType.Particle;
-                                           XmlSchemaSequence sequence = particle as System.Xml.Schema.XmlSchemaSequence;
-                                            if (sequence != null)
-                                            {
-                                                foreach (System.Xml.Schema.XmlSchemaElement childElement in sequence.Items)
-                                                {
-                                                    string parameterName = childElement.Name;
-                                                    string parameterType = childElement.SchemaTypeName.Name;
-
-                                                    foreach (XmlSchema schemaGlobal in sd.Types.Schemas)
-                                                    {
-                                                        foreach (DictionaryEntry item in schemaGlobal.SchemaTypes)
-                                                        {
-                                                            if(((XmlQualifiedName)item.Key) == childElement.SchemaTypeName)
-                                                            {
-                                                                XmlSchemaParticle particu = ((XmlSchemaComplexType)item.Value).Particle;
-                                                                XmlSchemaSequence seq = particu as System.Xml.Schema.XmlSchemaSequence;
-
-                                                                foreach (XmlSchemaElement elementito in seq.Items)
-                                                                {
-                                                                    string parameterNameu = elementito.Name;
-                                                                    string parameterTypeu = elementito.SchemaTypeName.Name;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    
-
-                                                    //XmlTextWriter textWriter = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po3.xml", null);
-                                                    //textWriter.Formatting = Formatting.Indented;
-                                                    //XmlSampleGenerator generator = new XmlSampleGenerator(set, childElement.QualifiedName);
-                                                    //generator.WriteXml(textWriter);
-
-                                                    //XmlTextWriter textWriter2 = new XmlTextWriter(@"d:\dev\Sofka\Test\TempFiles\po4.xml", null);
-                                                    //textWriter.Formatting = Formatting.Indented;
-                                                    //XmlSampleGenerator generator2 = new XmlSampleGenerator(set, childElement.SchemaTypeName);
-                                                    //generator.WriteXml(textWriter);
-
-                                                    //parameters.Add(new Parameter(parameterName, parameterType));
-                                                }
-                                            }
+                                            parameters.Add(new Parameter(element.Name, element.ElementSchemaType.Name,
+                                                this.GetParameters(element.ElementSchemaType.QualifiedName.Namespace,
+                                                element.ElementSchemaType.Name,
+                                                xmlSchemaSet), element.QualifiedName.Namespace));
+                                        }
+                                        else
+                                        {
+                                            parameters.Add(new Parameter(element.Name, element.SchemaTypeName.Name, null, null));
                                         }
                                     }
                                 }
@@ -125,34 +168,77 @@ namespace Sofka.Automation.Provider
                 }
             }
 
+            return parameters;
+        }
 
+        private bool ExistParameterName(string name, List<Parameter> parameters)
+        {
+            return parameters.Any(c => c.Name == name);
+        }
 
-            // create an importer and associate with the ServiceDescription
-            ServiceDescriptionImporter importer = new ServiceDescriptionImporter();
-            importer.ProtocolName = "SOAP";
-            importer.CodeGenerationOptions = CodeGenerationOptions.None;
-            importer.AddServiceDescription(sd, null, null);
-
-            // Download and inject any imported schemas (ie. WCF generated WSDL)            
-            foreach (XmlSchema wsdlSchema in sd.Types.Schemas)
+        private Dictionary<string, dynamic> GetOperations(ServiceDescription serviceDescription)
+        {
+            Dictionary<string, dynamic> operations = new Dictionary<string, dynamic>();
+            foreach (PortType portType in serviceDescription.PortTypes)
             {
-                // Loop through all detected imports in the main schema
-                foreach (XmlSchemaObject externalSchema in wsdlSchema.Includes)
+                foreach (Operation operation in portType.Operations)
                 {
-                    // Read each external schema into a schema object and add to importer
-                    if (externalSchema is XmlSchemaImport)
-                    {
-                        Uri baseUri = new Uri(wsdlUrl);
-                        Uri schemaUri = new Uri(baseUri, ((XmlSchemaExternal)externalSchema).SchemaLocation);
+                    dynamic expandoObject = new ExpandoObject();
+                    expandoObject.Operation = operation;
+                    operations.Add(string.Format("{0}-{1}", portType.Name, operation.Name), expandoObject);
+                }
+            }
 
-                        Stream schemaStream = http.OpenRead(schemaUri);
-                        System.Xml.Schema.XmlSchema schema = XmlSchema.Read(schemaStream, null);
-                        importer.Schemas.Add(schema);
+            return operations;
+        }
+
+        private XmlSchemaSet GetSchemasService(ServiceDescription serviceDescription)
+        {
+            XmlSchemaSet xmlSchemaSet = new XmlSchemaSet();
+            foreach (XmlSchema item in serviceDescription.Types.Schemas)
+            {
+                xmlSchemaSet.Add(item);
+            }
+
+            xmlSchemaSet = this.ValidateSchemaLocation(xmlSchemaSet);
+            xmlSchemaSet.Compile();
+
+            return xmlSchemaSet;
+        }
+
+        private XmlSchemaSet ValidateSchemaLocation(XmlSchemaSet xmlSchemaSet)
+        {
+            XmlSchemaSet xmlSchemaSetAux = xmlSchemaSet;
+            foreach (XmlSchema schemaLocation in xmlSchemaSetAux.Schemas())
+            {
+                foreach (XmlSchemaImport include in schemaLocation.Includes)
+                {
+                    if (!string.IsNullOrEmpty(include.SchemaLocation))
+                    {
+                        xmlSchemaSet.Add(include.Schema);
                     }
                 }
             }
 
-            return false;
+            return xmlSchemaSet;
+        }
+
+        private ServiceDescription GetServiceDescription(string url)
+        {
+            WebClient http = new WebClient();
+            ServiceDescription serviceDescription = null;
+
+            serviceDescription = ServiceDescription.Read(http.OpenRead(url));
+
+            return serviceDescription;
+        }
+
+        public static bool IsPropertyExist(dynamic settings, string name)
+        {
+            if (settings is System.Dynamic.ExpandoObject)
+                return ((IDictionary<string, object>)settings).ContainsKey(name);
+
+            return settings.GetType().GetProperty(name) != null;
         }
     }
 }

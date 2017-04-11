@@ -7,31 +7,21 @@ using System.Threading.Tasks;
 namespace Sofka.Automation.Entities.Wsdl
 {
     public struct Parameter
-    {
-        /// 
-
-        /// constructor
-        /// 
-
-        /// 
-        /// 
-        public Parameter(string name, string type)
+    {       
+        public Parameter(string name, string type, object value, string NameSpace)
         {
             this.Name = name;
             this.Type = type;
+            this.Value = value;
+            this.NameSpace = NameSpace;
         }
 
-        /// 
+        public string Name { get; set; }
 
-        /// Name
-        /// 
+        public string Type { get; set; }
 
-        public string Name;
-        /// 
+        public object Value { get; set; }
 
-        /// Type
-        /// 
-
-        public string Type;
+        public string NameSpace { get; set; }
     }
 }

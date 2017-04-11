@@ -63,6 +63,10 @@
     <Compile Include="XsdGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sofka.Automation.CrossCutting\Sofka.Automation.CrossCutting.csproj">
+      <Project>{7b21932b-2ad6-4d82-916f-c83a10c48083}</Project>
+      <Name>Sofka.Automation.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sofka.Automation.Entities\Sofka.Automation.Entities.csproj">
       <Project>{D423CDB6-2997-49B2-B52F-739130F5804F}</Project>
       <Name>Sofka.Automation.Entities</Name>

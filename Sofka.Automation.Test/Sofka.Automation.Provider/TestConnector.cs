@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sofka.Automation.Entities.Test;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace Sofka.Automation.Provider
 
         public string WebMethod { get; set; }
 
-        public List<Parameter> Parameters { get; set; }
+        public string Request { get; set; }
 
         public ServiceType WSServiceType { get; set; }
 
@@ -63,15 +64,11 @@ namespace Sofka.Automation.Provider
             string MethodCall = "<" + this.WebMethod + @" xmlns=""http://tempuri.org/"">";
             string StrParameters = string.Empty;
 
-            foreach (Parameter param in this.Parameters)
-            {
-                StrParameters = StrParameters + "<" + param.Name + ">" + param.Value + "</" + param.Name + ">";
-            }
-
+            StrParameters = this.Request;
             MethodCall = MethodCall + StrParameters + "</" + this.WebMethod + ">";
 
-            StringBuilder sb = new StringBuilder(_soapEnvelope);
-            sb.Insert(sb.ToString().IndexOf("</soap:Body>"), MethodCall);
+            StringBuilder sb = new StringBuilder(this.Request);
+            //sb.Insert(sb.ToString().IndexOf("</soap:Body>"), MethodCall);
 
             return sb.ToString();
         }

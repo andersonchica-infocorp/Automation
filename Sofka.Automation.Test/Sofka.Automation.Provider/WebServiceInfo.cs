@@ -163,7 +163,7 @@ namespace Sofka.Automation.Provider
                                 {
                                     string parameterName = childElement.Name;
                                     string parameterType = childElement.SchemaTypeName.Name;
-                                    parameters.Add(new Parameter(parameterName, parameterType));
+                                    parameters.Add(new Parameter(parameterName, parameterType, null, null));
                                 }
                             }
                         }
