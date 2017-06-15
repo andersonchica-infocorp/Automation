@@ -22,8 +22,9 @@ namespace Sofka.Automation.Provider
 
         public XsdGenerator()
         {
-            this.GetStructure("http://localhost/Sofka.Automation.Dummy.Wcf/Loan.svc?Wsdl");
+            this.GetStructure("http://www.webservicex.net/country.asmx?wsdl");
             //this.GetStructure("https://www.w3schools.com/xml/tempconvert.asmx?wsdl");
+            //this.GetStructure("http://sofkatestservice.azurewebsites.net/Services/ComplexService.asmx?wsdl");
         }
 
 
@@ -46,47 +47,63 @@ namespace Sofka.Automation.Provider
         private XmlDocument GenerateXml(KeyValuePair<string, dynamic> operation)
         {
             XmlDocument xmlDocument = new XmlDocument();
-            XmlElement request = (XmlElement)xmlDocument.AppendChild(xmlDocument.CreateElement(operation.Value.Operation.Name));
-            XmlElement parameters = this.GetXmlParameters(operation.Value.ParameterInput, xmlDocument, request);
+            List<Parameter> a = new List<Parameter>();
+            if (IsPropertyExist(operation.Value, "ParameterInput"))
+            {
+                a = operation.Value.ParameterInput;
+            }
+
+            XmlElement request = this.GetXmlParameters(a, xmlDocument, operation.Value.Operation.Name);
+            request.SetAttribute("xmlns", operation.Value.Input.Message.Namespace);
 
             return xmlDocument;
         }
 
-        private XmlElement GetXmlParameters(List<Parameter> parameters, XmlDocument xmlDocument, XmlElement currentXmlElement)
+        private XmlElement GetXmlParameters(List<Parameter> parameters, XmlDocument xmlDocument, string elementName)
         {
-            string aliasNameSpaceCurrentElement = string.Empty;
-            string alias = string.Empty;
+            XmlElement xmlElementCreated = xmlDocument.CreateElement(elementName);
+            Dictionary<string, string> nameSpaceInserted = new Dictionary<string, string>();
+
             foreach (Parameter parameter in parameters)
             {
-                if (!string.IsNullOrEmpty(parameter.NameSpace))
+                if (parameter.Value != null)
                 {
-                    if (count != 0)
-                    {
-                        alias = string.Format("sofka{0}", this.count);
-                        aliasNameSpaceCurrentElement = string.Format("xmlns:{0}", alias);
-                    }
-                    else
-                    {
-                        aliasNameSpaceCurrentElement = "xmlns";
-                    }
-
-                    currentXmlElement.SetAttribute(aliasNameSpaceCurrentElement, parameter.NameSpace);
-                    this.count++;
-
-                    //this.GetXmlParameters(parameter.Value, xmlDocument, currentXmlElement)
+                    xmlElementCreated.AppendChild(GetXmlParameters((List<Parameter>)parameter.Value, xmlDocument, parameter.Name));
                 }
                 else
                 {
+                    string aliasNameSpaceCurrentElement = string.Empty;
+                    string alias = string.Empty;
 
+                    if (!string.IsNullOrEmpty(parameter.NameSpace))
+                    {
+                        if (!nameSpaceInserted.ContainsKey(parameter.NameSpace))
+                        {
+                            alias = string.Format("sofka{0}", this.count);
+                            aliasNameSpaceCurrentElement = string.Format("xmlns:{0}", alias);
+
+                            xmlElementCreated.SetAttribute(aliasNameSpaceCurrentElement, parameter.NameSpace);
+                            nameSpaceInserted.Add(parameter.NameSpace, alias);
+                            this.count++;
+                        }
+                        else
+                        {
+                            var aliasNameSpace = nameSpaceInserted.FirstOrDefault(c => c.Key == parameter.NameSpace);
+                            alias = aliasNameSpace.Value;
+                            aliasNameSpaceCurrentElement = aliasNameSpace.Key;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(alias))
+                    {
+                        alias = string.Format("{0}:", alias);
+                    }
+
+                    xmlElementCreated.AppendChild(xmlDocument.CreateElement(string.Format("{0}{1}", alias, parameter.Name), parameter.NameSpace));
                 }
-
-                string aliasCurrentElement = string.IsNullOrEmpty(alias) ? string.Empty : string.Format("{0}:");
-
-                XmlElement appendElement = xmlDocument.CreateElement(string.Format("{0}{1}", aliasCurrentElement, parameter.Name));
-                currentXmlElement.AppendChild(appendElement);                
             }
 
-            return currentXmlElement;
+            return xmlElementCreated;
         }
 
         private Dictionary<string, dynamic> GetParametersOperations(Dictionary<string, dynamic> operations, XmlSchemaSet xmlSchemaSet, ServiceDescription serviceDescription)
@@ -140,7 +157,6 @@ namespace Sofka.Automation.Provider
                             }
 
                             XmlSchemaParticle particle = xmlSchemaComplexType.Particle;
-
                             XmlSchemaSequence sequence = particle as System.Xml.Schema.XmlSchemaSequence;
 
                             if (sequence != null)
@@ -158,7 +174,7 @@ namespace Sofka.Automation.Provider
                                         }
                                         else
                                         {
-                                            parameters.Add(new Parameter(element.Name, element.SchemaTypeName.Name, null, null));
+                                            parameters.Add(new Parameter(element.Name, element.SchemaTypeName.Name, null, xmlSchema.TargetNamespace));
                                         }
                                     }
                                 }
